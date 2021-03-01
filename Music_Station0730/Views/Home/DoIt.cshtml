@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewBag.Title = "DoIt";
+}
+<div class="row " style="margin-top: 20px;margin-bottom: 20px;">
+    <div class="col-6 text-center">
+        <a href="~/Home/Form" class="list-group-item list-group-item-action">音樂點播區</a>
+    </div>
+    <div class="col-6 text-center">
+        <a href="~/Home/DoIt" class="list-group-item list-group-item-action active">音樂創作</a>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="col-12">
+                <div class="item">
+                    <img src="~/Content/image/m0.png" style="width: auto; height: auto;">
+                    <button class="doIt_btn" name="1" id="d1">
+                        <img src="~/Content/image/m1.png"
+                             style="width: auto; height: auto;">
+                    </button>
+                    <button class="doIt_btn" name="2" id="d2">
+                        <img src="~/Content/image/m2.png"
+                             style="width: auto; height: auto;">
+                    </button>
+                    <button class="doIt_btn" name="3" id="d3">
+                        <img src="~/Content/image/m3.png"
+                             style="width: auto; height: auto;">
+                    </button>
+                    <button class="doIt_btn" name="4" id="d4">
+                        <img src="~/Content/image/m4.png"
+                             style="width: auto; height: auto;">
+                    </button>
+                    <button class="doIt_btn" name="5" id="d5">
+                        <img src="~/Content/image/m5.png"
+                             style="width: auto; height: auto;">
+                    </button>
+                    <button class="doIt_btn" name="6" id="d6">
+                        <img src="~/Content/image/m6.png"
+                             style="width: auto; height: auto;">
+                    </button>
+                    <button class="doIt_btn" name="7" id="d7">
+                        <img src="~/Content/image/m7.png"
+                             style="width: auto; height: auto;">
+                    </button>
+                    <div style="margin-top: 10px;">音頻播放間隔(毫秒)：<input id="sleep_time" type="number" value="100" /></div>
+                    <div>
+                        <form>
+                            <br><textarea id="doIt_text" cols="50"></textarea>
+                            <br><input class="btn btn-primary btn_size" id="doIt_submit" type="submit" value="送出">
+                            <button class="btn_size btn btn-primary" id="doIt_play" type="button">播放</button>
+                            <input class="btn_size btn btn-primary" id="btn_reset" type="reset" value="清除">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <audio class="audio1"><source src="@Url.Content("~/Content/music/pianoC.mp3")" type="audio/mpeg"></audio>
+    <audio class="audio1"><source src="@Url.Content("~/Content/music/pianoD.mp3")" type="audio/mpeg"></audio>
+    <audio class="audio1"><source src="@Url.Content("~/Content/music/pianoE.mp3")" type="audio/mpeg"></audio>
+    <audio class="audio1"><source src="@Url.Content("~/Content/music/pianoF.mp3")" type="audio/mpeg"></audio>
+    <audio class="audio1"><source src="@Url.Content("~/Content/music/pianoG.mp3")" type="audio/mpeg"></audio>
+    <audio class="audio1"><source src="@Url.Content("~/Content/music/pianoA.mp3")" type="audio/mpeg"></audio>
+    <audio class="audio1"><source src="@Url.Content("~/Content/music/pianoB.mp3")" type="audio/mpeg"></audio>
+</div>
+<div class="timetoplay"></div>
+<script type="text/javascript">
+    //音樂按鍵播放
+    var ioii = 2;
+    $('.doIt_btn').click(function () {
+        var inttt = this.name;
+        var int_change = $('#doIt_text').val();
+        int_change += inttt;
+        $('#doIt_text').val(int_change);
+        switch (inttt) {
+            case "1":
+                $('.audio1')[0].currentTime = 0;
+                $('.audio1')[0].play();
+                $('.timetoplay').append('<audio class="audio' + ioii + '"><source src="@Url.Content("~/Content/music/pianoC.mp3")" type="audio/mp3"></audio>');
+                ioii++;
+                break;
+            case "2":
+                $('.audio1')[1].currentTime = 0;
+                $('.audio1')[1].play();
+                $('.timetoplay').append('<audio class="audio' + ioii + '"><source src="@Url.Content("~/Content/music/pianoD.mp3")" type="audio/mp3"></audio>');
+                ioii++;
+                break;
+            case "3":
+                $('.audio1')[2].currentTime = 0;
+                $('.audio1')[2].play();
+                $('.timetoplay').append('<audio class="audio' + ioii + '"><source src="@Url.Content("~/Content/music/pianoE.mp3")" type="audio/mp3"></audio>');
+                ioii++;
+                break;
+            case "4":
+                $('.audio1')[3].currentTime = 0;
+                $('.audio1')[3].play();
+                $('.timetoplay').append('<audio class="audio' + ioii + '"><source src="@Url.Content("~/Content/music/pianoF.mp3")" type="audio/mp3"></audio>');
+                ioii++;
+                break;
+            case "5":
+                $('.audio1')[4].currentTime = 0;
+                $('.audio1')[4].play();
+                $('.timetoplay').append('<audio class="audio' + ioii + '"><source src="@Url.Content("~/Content/music/pianoG.mp3")" type="audio/mp3"></audio>');
+                ioii++;
+                break;
+            case "6":
+                $('.audio1')[5].currentTime = 0;
+                $('.audio1')[5].play();
+                $('.timetoplay').append('<audio class="audio' + ioii + '"><source src="@Url.Content("~/Content/music/pianoA.mp3")" type="audio/mp3"></audio>');
+                ioii++;
+                break;
+            case "7":
+                $('.audio1')[6].currentTime = 0;
+                $('.audio1')[6].play();
+                $('.timetoplay').append('<audio class="audio' + ioii + '"><source src="@Url.Content("~/Content/music/pianoB.mp3")" type="audio/mp3"></audio>');
+                ioii++;
+                break;
+        }
+    });
+    //音樂儲存
+    $('#doIt_submit').click(function () {
+        var msg = $('#doIt_text').val() + "\n";
+        var sleep_time = $('#sleep_time').val();
+        if (confirm("旋律： " + msg + "間隔： " + sleep_time) == true) {
+            alert('已送出');
+            return false;
+        } else {
+            return false;
+        }
+    });
+    //延遲
+    function sleep(miliseconds) {
+        var currentTime = new Date().getTime();
+        while (currentTime + miliseconds >= new Date().getTime()) {
+        }
+    }
+    //音樂連續撥放
+    //$('#doIt_play').click(function () {
+    //    var msg = $('#doIt_text').val();
+    //    var aa;
+    //    for (var i = 0; i < msg.length; i++) {
+    //        aa = (msg.substring(i, i + 1) - 1);
+    //        $('.audio2')[aa].pause();
+    //        $('.audio2')[aa].currentTime = 0.00;
+    //        $('.audio2')[aa].play();
+    //        sleep(parseInt($('#sleep_time').val()));
+    //    }
+    //});
+    $('#doIt_play').click(function () {
+        var msg = $('#doIt_text').val();
+        @*for (var j = 2; j <= msg.length + 2; j++) {
+            aa = msg.substring(j - 2, j - 1);
+            switch (aa) {
+                case "1":
+                    $('.timetoplay').append('<audio class="audio' + j + '" controls><source src="@Url.Content("~/Content/music/pianoC.mp3")" type="audio/mp3"></audio>');
+                    break;
+                case "2":
+                    $('.timetoplay').append('<audio class="audio' + j + '" controls><source src="@Url.Content("~/Content/music/pianoD.mp3")" type="audio/mp3"></audio>');
+                    break;
+                case "3":
+                    $('.timetoplay').append('<audio class="audio' + j + '" controls><source src="@Url.Content("~/Content/music/pianoE.mp3")" type="audio/mp3"></audio>');
+                    break;
+                case "4":
+                    $('.timetoplay').append('<audio class="audio' + j + '" controls><source src="@Url.Content("~/Content/music/pianoF.mp3")" type="audio/mp3"></audio>');
+                    break;
+                case "5":
+                    $('.timetoplay').append('<audio class="audio' + j + '" controls><source src="@Url.Content("~/Content/music/pianoG.mp3")" type="audio/mp3"></audio>');
+                    break;
+                case "6":
+                    $('.timetoplay').append('<audio class="audio' + j + '" controls><source src="@Url.Content("~/Content/music/pianoA.mp3")" type="audio/mp3"></audio>');
+                    break;
+                case "7":
+                    $('.timetoplay').append('<audio class="audio' + j + '" controls><source src="@Url.Content("~/Content/music/pianoB.mp3")" type="audio/mp3"></audio>');
+                    break;
+            }
+        }*@
+        for (var i = 2; i <= msg.length + 2; i++) {
+            //aa = (msg.substring(i, i + 1) - 1);
+            $('.audio' + i)[0].pause();
+            $('.audio' + i)[0].currentTime = 0.01;
+            $('.audio' + i)[0].play();
+            sleep(parseInt($('#sleep_time').val()));
+        }
+    });
+    //清除
+    $('#btn_reset').click(function () {
+        $('.timetoplay').empty();
+    });
+</script>

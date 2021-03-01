@@ -1,0 +1,184 @@
+﻿/*Header*/
+.indexIMG {
+    margin: 5px 10px;
+    padding: 0;
+    margin-left: 10vh;
+}
+
+    .indexIMG img {
+        width: 70px;
+    }
+
+.header_margin {
+    margin-bottom: 0;
+}
+
+.header_fontsize {
+    font-size: 28px;
+}
+
+.header_fontsize2 {
+    margin-left: -12px;
+    font-size: 20px;
+}
+
+.header_right {
+    float: right;
+    margin-right: 50px;
+}
+
+.login_right {
+    float: right;
+}
+
+.Layout_bgimg {
+    background: url("https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2019/06/26/99/6488491.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=1050") no-repeat center / cover;
+    background-position: bottom;
+    margin-bottom: 0;
+}
+
+
+/*註冊頁面 排序*/
+.Register_a1 {
+    margin-right: 10px;
+    margin-left: 40px;
+    margin-top: 10px;
+}
+.Register_a2 {
+    margin-left: 3px;
+}
+.Register_a3 {
+    margin-top: 10px;
+}
+/*body*/
+body {
+    padding: 0;
+    font-size: 18px;
+}
+.bg_color {
+    background-color: #ffeeee;
+}
+.Form_btn_size {
+    width: 120px;
+    height: 35px;
+    font-size: 20px;
+    line-height: 0;
+    padding: 0 0;
+}
+.content_padding {
+    padding: 15px 0;
+}
+/*"搜尋作曲家"頁面轉換*/
+.table_animation {
+    animation: fadeIn ease .8s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.DoIt_div_margin {
+    margin-bottom: 20px;
+}
+.Form_DoIt_div {
+    margin-bottom: 20px;
+}
+.Form_form {
+    margin: 15px 0;
+}
+.btn_size {
+    width: 60px;
+    height: 37px;
+    font-size: 20px;
+    line-height: 0;
+    padding: 0 0;
+    margin-bottom: 5px;
+}
+#imusic_a {
+    font-size: 35px;
+}
+/*Discuss*/
+.Discuss_icon {
+    color: white;
+    padding-right: 15px;
+}
+.Discuss_icon_User {
+    color: #333333;
+    padding-right: 15px;
+}
+.Discuss_div {
+    margin: auto;
+}
+.Discuss_card {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.Discuss_card_r {
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}
+.Discuss_UserName_padding {
+    padding-top: 7px;
+}
+.Create_input {
+    padding-bottom: 30px;
+}
+form {
+    display: block;
+}
+.input_text {
+    line-height: 1.5;
+    margin-bottom: 4px;
+}
+/*footer*/
+footer {
+    padding: 0;
+    margin: 0;
+}
+.footer_bg_color {
+    background-color: black;
+    padding: 15px 0;
+    height:auto;
+}
+
+.main-footer i {
+    font-size: 38px;
+}
+
+.main-footer p {
+    padding: 0;
+    margin: 0;
+    clear: both;
+}
+
+.btm_left {
+}
+
+.btm_right {
+    margin: 5px 0;
+}
+
+.fa-facebook-square {
+    color: rgb(24,119,242);
+}
+
+.fa-instagram {
+    color: pink;
+}
+
+.fa-youtube {
+    color: #FF0000;
+}
+
+.btm {
+    margin: 0;
+    padding: 0;
+    color: aliceblue;
+}
+/*音樂創作*/

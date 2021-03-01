@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Music_Station0730.Models.Content>
+@using Music_Station0730.Models
+
+<div>
+        @{
+            //if (ViewBag.cont=="0")//ViewBag.cont.ToString()=="0" |
+            if (@ViewBag.cont != "0")
+            {
+                using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    foreach (var item in Model)
+                    {
+
+                        <div class="row table-bordered text-center">
+                            <div class="col-4">
+                                @*@Html.DisplayFor(model => item.UserName)*@
+                                <input class="form-control text-left" type="text" value="@item.UserName" readonly="readonly" />
+                                @Html.ValidationMessageFor(model => item.UserName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-6">
+                                @*@Html.DisplayFor(model => item.Content1)*@
+                                <input class="form-control text-left" type="text" value="@item.Content1" readonly="readonly" />
+                                @Html.ValidationMessageFor(model => item.Content1, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-2">
+                                <input type="submit" value="delete" class="btn btn-default" name="@item.id" />
+                            </div>
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+
+                <div class="row table-bordered text-center">
+                    <div class="col-4">
+                        @*@Html.DisplayFor(model => item.UserName)*@
+                        <input class="form-control text-left" type="text" value="" disabled="disabled" />
+                    </div>
+                    <div class="col-6">
+                        @*@Html.DisplayFor(model => item.Content1)*@
+                        <input class="form-control text-left" type="text" value="歡迎留下你的評論" readonly="readonly" />
+                    </div>
+                </div>
+            }
+
+
+
+        }
+        @*<div class="col-12" border="none"><iframe width="520" height="100%" scrolling="no" frameborder="0" src="http://localhost:14215/VIP/Discuss3/@ViewBag.id"></iframe></div>*@
+
+        @*@using (Html.BeginForm())
+            {
+                <div class="col-4"></div>
+                <div class="col-8">@Html.EditorFor(Model=>Model.content1, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            }*@
+</div>

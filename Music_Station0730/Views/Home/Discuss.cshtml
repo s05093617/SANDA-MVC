@@ -1,0 +1,179 @@
+﻿@using Music_Station0730.Models
+@model Music_Station0730.Models.Playerr
+
+@{
+    ViewBag.Title = "Discuss";
+}
+
+<div class="card" style="margin-top: 15px;">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-img-top embed-container text-center">
+                <iframe width="100%" height="500"
+                        src="@Html.DisplayFor(Model=>Model.YT_video)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="card-title text-center">
+        <span>@Html.DisplayFor(Model => Model.style)  |</span>
+        <span>@Html.DisplayFor(Model => Model.PlayName)  |</span>
+        <span>@Html.DisplayFor(Model => Model.SongName)</span>
+    </h4>
+    <!--顯示留言 +修改刪除-->
+    @if (ViewBag.cont != null)
+    {
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @foreach (var item in ViewBag.cont)
+                {
+                    using (Html.BeginForm())
+                    {
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-2 Discuss_UserName_padding">
+                                @if (Session["UserName"] != null && Session["UserName"].ToString() == item.UserName)
+                                {
+                                    <i class="fas fa-user Discuss_icon_User"></i>
+                                    @item.UserName
+                                }
+                                else
+                                {
+                                    <i class="fas fa-user Discuss_icon"></i>
+                                    @item.UserName
+                                }
+                            </div>
+                            <div class="col-8">
+                                <!--顯示留言-->
+                                @if (Session["UserName"] != null && Session["UserName"].ToString() == item.UserName)
+                                {
+                                    <input type="text" class="form-control" style="display: inline;" value="@item.Content1" name="DContent1">
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control" style="display: inline;" value="@item.Content1" name="DContent1" readonly="readonly">
+                                }
+                                <!--修改刪除-->
+                                @if (Session["UserName"] != null & Session["level"] != null)
+                                {
+                                    if (Session["level"].ToString() == "0")
+                                    {
+                                        //管理者不能擁有修改 別人留言的權限 所以只顯示自己的
+                                        if (Session["UserName"].ToString() == item.UserName)
+                                        {
+                                            <input type="submit" value="Edit" class="btn btn-primary input_text Edit" name="btn_move" />
+                                            <input type="submit" value="Delete" class="btn btn-danger input_text admin_delete" name="btn_move" />
+                                        }
+                                        else
+                                        {
+                                            <input type="submit" value="Delete" class="btn btn-danger input_text admin_delete" style="margin-left: 58.5px;" name="btn_move" />
+                                        }
+                                        <input type="hidden" value="@item.ContentID" class="btn btn-primary" name="DContentID" readonly="readonly" />
+                                    }
+                                    else if (Session["UserName"].ToString() == item.UserName)
+                                    {
+                                        <input type="submit" value="Edit" class="btn btn-primary input_text Edit" name="btn_move" />
+                                        <input type="submit" value="Delete" class="btn btn-danger input_text Delete" name="btn_move" />
+                                        <input type="hidden" value="@item.ContentID" class="btn btn-primary" name="DContentID" readonly="readonly" />
+                                    }
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-2"></div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-2">
+                    </div>
+                    <div class="col-2">
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control text-left" type="text" value="尚未有留言" readonly="readonly" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    }
+    <!--留言板 留言-->
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        {
+            <div class="row" style="padding-bottom: 15px;">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-2 Discuss_UserName_padding">
+                            @if (Session["UserName"] == null)
+                            {
+                                <input class="form-control" type="hidden" name="UserName" value="訪客" readonly="readonly" />
+
+                                <i class="fas fa-user Discuss_icon"></i><span>訪客</span>
+
+                            }
+                            else
+                            {
+                                <input class="form-control" type="hidden" name="UserName" value='@Session["Username"].ToString()' readonly="readonly" />
+                                <i class="fas fa-user Discuss_icon_User"></i>@Session["UserName"].ToString()
+                            }
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="text" name="Content1" style="display: inline;" placeholder="留下評論吧～" />
+                            <input type="submit" value="Create" class="btn btn-primary  input_text" name="btn_move" />
+                            <input type="hidden" name="DContentID" value="0" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+
+        }
+    }
+
+</div>
+<div class="col-12 col-md-12 card-text text-center" style="font-size: 26px; padding-top: 5px;">
+    @Html.ActionLink("Back to List", "Form")
+</div>
+<script>
+    $('.Edit').click(function () {
+        var msg = "確定Edit內容嗎?";
+        if (confirm(msg) == true) {
+            alert('已送出');
+        } else {
+            return false;
+        }
+    });
+    $('.Delete').click(function () {
+        var msg = "確定Delete內容嗎?";
+        if (confirm(msg) == true) {
+            alert('已送出');
+        } else {
+            return false;
+        }
+    });
+    $('.admin_delete').click(function () {
+        var msg = "確定admin_delete內容嗎?";
+        if (confirm(msg) == true) {
+            alert('已送出');
+        } else {
+            return false;
+        }
+    });
+</script>

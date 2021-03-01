@@ -1,0 +1,23 @@
+﻿@model Music_Station0730.Models.User
+@using Music_Station0730.Models
+@{
+    ViewBag.Title = "Login";
+}
+<h2 style="margin: 15px 0;">登入</h2>
+
+<div class="container text-center" style="min-height: 50vh;">
+    <span style="color: red;">@ViewBag.error</span>
+    <form method="POST" style="padding-right: 75px; margin: 20px 0;">
+        @Html.AntiForgeryToken()
+        <label for="Login_UserName">
+            <span class="Register_a1">帳號</span><input type="text" name="Login_UserName" id="Login_UserName"/>
+        </label><br/>
+        <label for="Login_PassWord">
+            <span class="Register_a1">密碼</span><input type="text" name="Login_PassWord" id="Login_PassWord"/>
+        </label><br/>
+        <input class="btn btn-primary Register_a1 Register_a3" type="submit" id="Login_sumbit" onclick="history.go(-1);"/>
+    </form>
+</div>
+<script>
+    $('#Login_UserName').focus();
+</script>

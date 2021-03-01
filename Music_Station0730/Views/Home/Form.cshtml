@@ -1,0 +1,149 @@
+﻿@using Music_Station0730.Models
+@model IEnumerable<Music_Station0730.Models.Playerr>
+@{
+    ViewBag.Title = "Form";
+}
+
+
+<div class="row" style="margin: 25px 0;">
+    <div class="col-6 text-center">
+        <a href="~/Home/Form" class="list-group-item list-group-item-action active">音樂點播區</a>
+    </div>
+    <div class="col-6 text-center">
+        <a href="~/Home/DoIt" class="list-group-item list-group-item-action">音樂創作</a>
+    </div>
+</div>
+<form class="Form_form" method="post" id="SearchForm">
+    @Html.Hidden("mode")
+    @{
+        if (Session["UserName"] != null)
+        {
+            <a class="create_fontsize" href="/Home/Create"><i class="fas fa-arrow-circle-up"></i>新增</a>
+        }
+    }
+    <select id="aa" name="aa" class="form-control" style="display: inline;">
+        <option value="">搜尋風格</option>
+        @{
+            List<string> a1_color = new List<string>();
+            Random a1 = new Random();
+            foreach (var i in ViewBag.select)
+            {
+                <option value="@i.ToString()">@i.ToString()</option>
+                a1_color.Add(i);
+                for (int j = 0; j <= 2; j++)
+                {
+                    a1_color.Add(a1.Next(50, 230).ToString());
+                }
+            }
+        }
+
+    </select>
+    <input type="text" name="bb" value="" placeholder="搜尋作曲家" class="form-control" style="display: inline;" />
+    <select id="cc" name="cc" class="form-control" style="display: inline;">
+        <option value="new">日期最新</option>
+        <option value="old">日期最舊</option>
+    </select>
+
+    <input class="btn btn-primary btn_size" id="Form_submittt" type="submit" value="提交" style="display: inline;">
+    @*<input type="button" class="btn btn-primary" value="Export" id="exportData" />*@
+
+</form>
+<div class="row table_animation">
+    @foreach (var item in Model)
+    {
+        string[] YT_id = item.YT_video.Split(new char[2] { '/', '?' });
+        <div class="col-md-4 col-sm-12" style="margin-bottom: 10px;">
+            <div class="card">
+                <a href="~/Home/Discuss/@item.PlayerID"><img src="http://img.youtube.com/vi/@YT_id[4]/hqdefault.jpg" style="width: 100%" class="card-img-top" alt=""></a>
+                <div class="card-body">
+                    <h5 class="card-title">@item.style</h5>
+                    <h5 class="card-title">@item.PlayName</h5>
+                    <p class="card-text">
+                        @item.SongName
+                        <br />
+                        <div>
+                            @{
+                                if (Session["UserName"] != null)
+                                {
+                                    if (Session["level"].ToString() == "0")
+                                    {
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.PlayerID })<span>  |</span>
+                                        @Html.ActionLink("Details", "Details", new { id = item.PlayerID })<span>  |</span>
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.PlayerID })
+
+
+
+
+                                    }
+                                    else if (Session["level"].ToString() == "1")
+                                    {
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.PlayerID })<span>  |</span>
+                                        @Html.ActionLink("Details", "Details", new { id = item.PlayerID })
+
+
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Details", "Details", new { id = item.PlayerID })
+
+                                    }
+                                }
+
+                            }
+                        </div>
+
+                    </p>
+
+                    @{
+                        if (ViewBag.cc_change.ToString() == "new")
+                        {
+                            for (int i = a1_color.Count - 4; i > -1; i -= 4) //用for迴圈把RGB的數字加進去 並且也需要IF 不斷去判斷 音樂風格 降冪
+                            {
+                                if (a1_color[i].ToString() == item.style.ToString())
+                                {
+                                    <a href="~/Home/Discuss/@item.PlayerID"><i class="fas fa-music" style="color:rgb(@a1_color[i+1],@a1_color[i+2],@a1_color[i+3]);" id="imusic_a"></i></a>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < a1_color.Count; i += 4) //用for迴圈把RGB的數字加進去 用IF判斷 音樂風格 升冪
+                            {
+                                if (a1_color[i].ToString() == item.style.ToString())
+                                {
+                                    <a href="~/Home/Discuss/@item.PlayerID"><i class="fas fa-music" style="color:rgb(@a1_color[i+1],@a1_color[i+2] ,@a1_color[i+3]);" id="imusic_a"></i></a>
+                                }
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+                        }
+</div>
+@*@if (Model != null)
+    {
+        <script>
+            $(document).ready(function() {
+                $('#mode').val("export");
+                $('#SearchForm').submit();
+            });
+        </script>
+    }*@
+<script>
+    $('#exportData').click(function () {
+        $('#mode').val("export");
+        $('#SearchForm').submit();
+    });
+    $('#Form_submittt').click(function () {
+        Session["aa"] = aa;
+        Session["bb"] = bb;
+        Session["cc"] = cc;
+        $('#mode').val("");
+        $('#SearchForm').submit();
+    });
+</script>
+
+
+
+
